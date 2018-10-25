@@ -200,7 +200,7 @@ export BASH_IT_THEME="powerline-multiline"
 export BASH_IT_THEME="/home/foo/my_theme/my_theme.theme.bash"
 ```
 
-You can easily preview the themes in your own shell using `BASH_PREVIEW=true reload`.
+You can easily preview the themes in your own shell using `BASH_PREVIEW=true bash-it reload`.
 
 If you've created your own custom prompts, we'd love it if you shared with everyone else! Just submit a Pull Request.
 You can see theme screenshots on [wiki/Themes](https://github.com/Bash-it/bash-it/wiki/Themes).
@@ -311,6 +311,19 @@ Set `SCM_GIT_IGNORE_UNTRACKED` to 'true' to **ignore** *untracked* files:
 Also, with this flag to false, Bash-it will not show the repository as dirty when the repo has *untracked* files, and will not display the count of *untracked* files.
 
 **NOTE:** If you set in git configuration file the option to ignore *untracked* files, this flag has no effect, and Bash-it will ignore *untracked* files always.
+
+### Stash item count
+
+When `SCM_GIT_SHOW_DETAILS` is enabled, you can get the count of *stashed* items. This feature can be useful when a user has a lot of stash items.
+This feature is controlled through the flag `SCM_GIT_SHOW_STASH_INFO` as follows:
+
+Set `SCM_GIT_SHOW_STASH_INFO` to 'true' (the default value) to **show** the count of stashed items:
+
+* `export SCM_GIT_SHOW_STASH_INFO=true`
+
+Set `SCM_GIT_SHOW_STASH_INFO` to 'false' to **don't show** it:
+
+* `export SCM_GIT_SHOW_STASH_INFO=false`
 
 ### Git user
 
