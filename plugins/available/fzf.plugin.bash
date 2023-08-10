@@ -4,10 +4,17 @@
 cite about-plugin
 about-plugin 'load fzf, if you are using it'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -r ~/.fzf.bash ] ; then
+  source ~/.fzf.bash
+elif [ -r "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] ; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
+fi
 
-if [ -z ${FZF_DEFAULT_COMMAND+x}  ]; then
-  command -v fd &> /dev/null && export FZF_DEFAULT_COMMAND='fd --type f'
+# No need to continue if the command is not present
+_command_exists fzf || return
+
+if [ -z ${FZF_DEFAULT_COMMAND+x}  ] && _command_exists fd ; then
+  export FZF_DEFAULT_COMMAND='fd --type f'
 fi
 
 fe() {
@@ -32,14 +39,4 @@ fcd() {
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
-}
-
-vf() {
-  about "Use fasd to search the file to open in vim"
-  group "fzf"
-  param "1: Search term for fasd"
-  example "vf xml"
-
-  local file
-  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
 }

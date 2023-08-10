@@ -15,3 +15,10 @@ bats
 *.sublime-workspace
 *.sublime-project
 enabled/*
+/enabled
+tmp/
+
+# Do not save profiles
+profiles/*
+# apart from the default one
+!profiles/default.bash_it
